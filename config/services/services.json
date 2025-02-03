@@ -1,0 +1,33 @@
+{
+    "database": {
+        "class": "PDO",
+        "args": [
+            "mysql:host=localhost;dbname=task2;charset=utf8", "root", null
+        ]
+    },
+
+    "object_mapper": {
+        "class": "Core\\Utils\\ObjectMapper"
+    },
+
+    "contract_repository": {
+        "class": "App\\Repository\\Impl\\ContractRepositoryImpl",
+        "args": [
+            "@database", "App\\Model\\Contract", "@object_mapper"
+        ]
+    },
+
+    "contract_service": {
+        "class": "App\\Service\\Impl\\ContractServiceImpl",
+        "args": [
+            "@contract_repository", "@object_mapper"
+        ]
+    },
+
+    "App\\Controller\\ContractController": {
+        "class": "App\\Controller\\ContractController",
+        "args": [
+            "@contract_service"
+        ]
+    }
+}
